@@ -1,0 +1,30 @@
+REPORT z15r_first.
+
+START-OF-SELECTION.
+
+" CONTROLE DE LOOP. 
+
+*DATA: A TYPE I.
+*A = 0.
+*WHILE A <> 8.
+*
+*  WRITE: / 'THIS IS THE LINE:', A.
+*  A = A + 1.
+*
+*  ENDWHILE.
+
+*  DO 32 TIMES.
+*
+*    CHECK sy-index BETWEEN 8 AND 12.
+*
+*    WRITE / sy-index. "SERÁ EXIBIDO OS VALORES DE 8 A 12.
+*
+*  ENDDO.
+
+*  DO 5 TIMES.
+*
+*    IF sy-index = 3.
+*      EXIT.
+*    ENDIF.
+*    WRITE / sy-index. " SERÁ EXIBIDO OS NUMEROS 1 2.
+*  ENDDO.

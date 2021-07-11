@@ -1,0 +1,34 @@
+START-OF-SELECTION.
+
+  "DATA E HORA ATUAL
+
+*  DATA: today TYPE d.
+*
+*  today = sy-datum.
+*  WRITE: / 'A DATA DE HOJE É:', today DD/MM/YYYY.
+*
+*  today = today + 08.
+*
+*  WRITE: / 'DE HOJE A 8, COMO DIZ UM BOM BAIANO, SERÁ:', today DD/MM/YYYY.
+
+*DATA: RIGHTTIME: TYPE T.
+*      RIGHTTIME = SY-UZEIT.
+*
+*WRITE /(60) RIGHTTIME USING EDIT MASK
+*      'AGORA SÃO: __:__:__'.
+*      RIGHTTIME =  RIGHTTIME + 75.
+*
+*      WRITE:/(60) RIGHTTIME: USING EDIT MASK
+*            'DAQUI A 75 SEGUNDOS SERÁ: __:__:__'.
+
+*  DATA: hora_marcada TYPE timestamp,
+*        hora_marcada_2 TYPE timestampl.
+*
+*  GET TIME STAMP FIELD hora_marcada.
+*
+*  WRITE: / 'HORA RESUMIDA É:', hora_marcada
+*
+*  TIME ZONE sy-zonlo.
+*  GET TIME STAMP FIELD hora_marcada_2.
+*  WRITE: /'HORA COMPLETA É:', HORA_MARCADA_2
+*  TIME ZONE SY-ZONLO.

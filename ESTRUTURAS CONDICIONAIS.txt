@@ -1,0 +1,83 @@
+REPORT z15r_first.
+
+START-OF-SELECTION.
+
+  "DECLARAÇÃO E DECISÃO.
+
+
+*
+*  DATA title_1(20) TYPE c. "DECLARO A VARIÁVEL E DETERMINO O TIPO - "DATA" ESTÁ PARA O ABAP COMO O "VAR" PARA O JAVASCRIPT E O TYPE "C" É DE CARACTER.
+*
+*  title_1  = 'HANDS ON'. " DESSA FORMA ATRIBUIMOS UM VALOR A UMA VARIÁVEL.
+
+
+  " A SEGUI UMA ESTRUTURA CONDICIONAL IF.
+
+*IF TITLE_1 = 'HANDS ON'.
+*
+*  WRITE 'TUDO OK POR AQUI'.
+*
+*  ENDIF.
+
+  "ESTRUTURA IF... ELSE
+
+*  DATA title_2(15) TYPE c.
+*
+*  title_2 = 'HANDS ON'.
+*
+*  IF title_2 = 'CONFUSO'.
+*
+*    WRITE 'NADA BOM'.
+*
+*  ELSE.
+*    WRITE ' POR AQUI TUDO OK TAMBÉM'.
+*
+*  ENDIF.
+
+
+  "INSTRUÇÃO IF ANINHADA
+
+*  DATA: title_1(10) TYPE c,
+*        title_2(15) TYPE c,
+*        title_3(10) TYPE c.
+*
+*
+*  title_1 = 'ABAP'.
+*  title_2 = 'JS'.
+*  title_3 = 'PHP'.
+*
+*  IF title_1 = 'ABAP'.
+*
+*    IF title_2 = 'JS'.
+*      IF title_3 = 'PHP'.
+*        WRITE 'SIM, TUDO OK'.
+*
+*      ELSE.
+*        WRITE 'SORRY MY BORTHER!'.
+*
+*      ENDIF.
+*    ENDIF.
+*  ENDIF.
+
+
+  " DECLARAÇÃO DE CONTROLE DE CASO
+
+  "INSTRUÇÃO CASE É USADA PARA COMPARAR 2 OU MAIS CAMPOS.
+
+*  DATA title_1(10) TYPE c.
+*  DATA title_2(10) TYPE c.
+*
+*
+*  title_1 = 'ABAP'.
+*  title_2 = 'JS'.
+*
+*  CASE title_1.
+*    WHEN 'ABAP'.
+*      WRITE 'BLZ, CONCENTRA AQUI!!'.
+*    WHEN 'JS'.
+*      WRITE 'MANO, CONCENTRA LA NO ABAP... DPS VC VOLTA!!'.
+*    WHEN 'TYPESCRIPT'.
+*      WRITE 'MANO, CONCENTRA LA... DPS VC VOLTA!!'.
+*    WHEN OTHERS.
+*      WRITE 'NA BOA VÉI... CONCENTRA LÁ!!!'.
+*  ENDCASE.
