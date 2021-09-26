@@ -1,0 +1,98 @@
+REPORT zism_flight_booking_list.
+
+"$. Region Define Region
+PARAMETERS pfldate TYPE d OBLIGATORY.
+"$. Endregion Define Region
+
+* DELCARANDO UMA VARIAVEL DO TIPO DE UMA TABELA
+
+
+"$. Region Query first 90 flight bookings for selected date
+DATA flight_bookings TYPE TABLE OF sbook.
+
+
+SELECT * FROM sbook INTO TABLE flight_bookings UP TO 90 ROWS
+      WHERE fldate = pfldate.
+
+"$. Endregion Query first 90 flight bookings for selected date
+"-----------------------------------------------------------------------------------"
+
+
+"$. Region define of day week
+DATA(day_of_they_week) = pfldate MOD 7.
+
+IF day_of_they_week > 1.
+  day_of_they_week = day_of_they_week - 1.
+ELSE.
+  day_of_they_week = day_of_they_week + 6.
+
+ENDIF.
+
+DATA(name_of_the_day) = SWITCH string(
+day_of_they_week WHEN 1 THEN 'Mondey'
+                 WHEN 2 THEN 'Tuesday'
+                 WHEN 3 THEN 'wednesday'
+                 WHEN 4 THEN 'Thursday'
+                 WHEN 5 THEN 'Friday'
+                 WHEN 6 THEN 'Saturday'
+                 WHEN 7 THEN 'Sunday'
+).
+
+"$. Endregion define of day week
+
+
+"$. Region Display flight bokkings in ALV
+"--------------------------------------------------------------------------------------------------"
+
+
+"---------------------------------------------------------------------"
+"$. "$. Region Prepare the title of the alv
+"---------------------------------------------------------------------"
+DATA(formatted_date) = |{ pfldate(4) }-{ pfldate+4(2) }-{ pfldate+6(2) }|.
+DATA(title_of_alv) = |Flight Bookings on { formatted_date }, { name_of_the_day }|.
+"----------------------------------------------------------------------"
+"$. Endregion Prepare the title of the alv
+"----------------------------------------------------------------------"
+
+
+
+TRY.
+    cl_salv_table=>factory(
+      IMPORTING
+          r_salv_table = DATA(alv_object)
+
+          CHANGING
+            t_table = flight_bookings
+
+    ).
+  CATCH cx_salv_not_found INTO DATA(factory_message).
+    MESSAGE e398(00) WITH factory_message->get_text( ).
+
+ENDTRY.
+
+
+alv_object->get_functions( )->set_all( ).
+
+alv_object->get_columns( )->set_optimize( ).
+
+alv_object->get_display_settings( )->set_striped_pattern( abap_true ).
+
+alv_object->get_display_settings( )->set_list_header( CONV #( title_of_alv ) ).
+
+TRY .
+    alv_object->get_columns( )->get_column( 'MANDT' )->set_visible( abap_false ).
+    alv_object->get_columns( )->get_column( 'CANCELLED' )->set_visible( abap_false ).
+    alv_object->get_columns( )->get_column( 'RESERVED' )->set_visible( abap_false ).
+    alv_object->get_columns( )->get_column( 'PASSFORM' )->set_visible( abap_false ).
+    alv_object->get_columns( )->get_column( 'PASSBIRTH' )->set_visible( abap_false ).
+  CATCH  cx_salv_not_found INTO DATA(column_not_found) .
+    MESSAGE e398(00) WITH column_not_found->get_text( ).
+ENDTRY.
+
+
+alv_object->display( ).
+
+"---------------------------------------------------------------------------------"
+
+"$. Endregion
+"--------------------------------------------------"
